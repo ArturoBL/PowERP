@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/11/06 01:38:15.000.766,=rtl.dcp</Transaction>
+    <Transaction>2018/11/06 01:38:24.000.255,D:\Documentos\Embarcadero\Studio\Projects\Package1.dproj=D:\Documentos\Embarcadero\Studio\Projects\DMFirebird.dproj</Transaction>
+    <Transaction>2018/11/06 01:39:01.000.083,D:\Documentos\Embarcadero\Studio\Projects\DMFirebird.dproj=E:\Proyectos\PowERP\V3\Source\Packages\uDMFirebird\DMFirebird.dproj</Transaction>
+    <Transaction>2018/11/06 01:40:16.000.034,=E:\Proyectos\PowERP\V3\Source\Packages\uDMFirebird\uDMFirebird.pas</Transaction>
+    <Transaction>2018/11/06 01:41:01.000.536,=xmlrtl.dcp</Transaction>
+    <Transaction>2018/11/06 01:41:01.000.579,=FIBPlus_XE7.dcp</Transaction>
+    <Transaction>2018/11/06 01:41:01.000.550,=vcl.dcp</Transaction>
+    <Transaction>2018/11/06 01:41:01.000.564,=dbrtl.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

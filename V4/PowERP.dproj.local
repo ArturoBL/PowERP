@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/10/28 11:55:27.000.608,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/09 20:25:44.000.909,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 00:20:20.000.018,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 00:22:54.000.171,E:\Proyectos\PowERP\V4\Source\Units\Main.dfm=D:\Documentos\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2018/11/13 00:22:54.000.171,E:\Proyectos\PowERP\V4\Source\Units\Main.pas=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 00:23:07.000.110,E:\Proyectos\PowERP\V4\PowERP.dproj=D:\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2018/11/23 20:16:26.000.884,=E:\Proyectos\PowERP\V4\Source\Units\Splash.pas</Transaction>
+    <Transaction>2018/11/23 20:51:53.000.662,=E:\Proyectos\PowERP\V4\Source\Units\Login.pas</Transaction>
+    <Transaction>2018/11/23 22:27:11.000.783,=E:\Proyectos\PowERP\V4\Source\Units\BarEditor.pas</Transaction>
+  </Transactions>
+</BorlandProject>

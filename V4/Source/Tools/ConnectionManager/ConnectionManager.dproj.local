@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/10/28 11:55:27.000.608,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/09 20:25:44.000.909,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 20:35:28.000.734,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 21:27:42.000.654,=D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2018/11/13 21:27:58.000.246,D:\Documentos\Embarcadero\Studio\Projects\Project1.dproj=D:\Documentos\Embarcadero\Studio\Projects\ConnectionManager.dproj</Transaction>
+    <Transaction>2018/11/13 21:30:52.000.099,D:\Documentos\Embarcadero\Studio\Projects\Unit1.dfm=E:\Proyectos\PowERP\V4\Source\Tools\ConnectionManager\uMainCM.dfm</Transaction>
+    <Transaction>2018/11/13 21:30:52.000.099,D:\Documentos\Embarcadero\Studio\Projects\Unit1.pas=E:\Proyectos\PowERP\V4\Source\Tools\ConnectionManager\uMainCM.pas</Transaction>
+    <Transaction>2018/11/13 21:30:58.000.069,D:\Documentos\Embarcadero\Studio\Projects\ConnectionManager.dproj=E:\Proyectos\PowERP\V4\Source\Tools\ConnectionManager\ConnectionManager.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

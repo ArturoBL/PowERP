@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+	<SPLASH></SPLASH>
+	<DBManager>
+		<DBMNAME>FIREBIRD</DBMNAME>
+		<DBMVERSION>V2.5</DBMVERSION>
+		<DBSETTINGS FBLIBRARY="fbclient.dll" FBFILE="DATA.FDB" FBDIALECT="3" HOST="localhost" PORT="3050" LOGINPROMPT="S" LOGINATTEMPTS="3"/>
+	</DBManager>
+</Configuration>

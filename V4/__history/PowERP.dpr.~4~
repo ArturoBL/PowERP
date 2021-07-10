@@ -1,0 +1,25 @@
+program PowERP;
+
+uses
+  Vcl.Forms,
+  uDMRoot,
+  System.SysUtils,
+  Main in 'Source\Units\Main.pas' {frmMain},
+  Splash in 'Source\Units\Splash.pas' {frmSplash};
+
+{$R *.res}
+
+
+
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  AppHeader := LoadHeader;
+  ShowSplash;
+
+
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.

@@ -1,0 +1,292 @@
+unit uDMFirebird;
+
+interface
+
+uses uDMRoot, classes, FIBDatabase, pFIBDatabase, FIBQuery, pFIBQuery, pFIBStoredProc,
+  DB, FIBDataSet, pFIBDataSet, dateutils, sysutils, vcl.dialogs, pFIBProps,Vcl.Forms,
+  SQLBuilder4D.Parser,SQLBuilder4D.Parser.GaSQLParser ;
+
+type
+  TDMFirebird = class(TDMRoot)
+  private
+    DB : tpFibDatabase;
+    TR, TRU : tpFibTransaction;
+    procedure loadConfig;
+  protected
+    fDBMAN: string;
+    fVersion: string;
+    fDialect : integer;
+    fHost : string;
+    fPort : integer;
+    fDBFile : string;
+    fLibrary : string;
+    fLoginPrompt: boolean;
+    fLoginAttempts: integer;
+    fAdminUser: boolean;
+    procedure DeclareAndSetVars(ds : TpFIBDataSet; params : array of variant);
+  public
+    { Public declarations }
+    Property DBMAN : string read fDBMAN;
+    Property VERSION : string read fVersion;
+    Property LoginPrompt : boolean read fLoginPrompt;
+    Property LoginAttempts : integer read fLoginAttempts;
+    Property AdminUser : boolean read fAdminUser;
+    Function Connect(pUsuario, pPassword : string) : string; override;
+    Function Connected : boolean; override;
+    function DSET(pSQL : string; pParams : array of variant; pReadonly : boolean): tdataset;overload;
+    function DSET(pSQL : string; pParams : array of variant; pSource : tdatasource; pKeyFields : string; pReadonly : boolean): tdataset;overload;override;
+    Function GetParam(sender: TObject; pParName : string) : string; override;
+    Function ExecSQL(pSQL : string; pParamList: array of Variant) : string; override;
+    procedure ExecProc(pProcname : string; pParamList : array of Variant); override;
+    function ExecFunc(pFunctName : string; pParamList : array of Variant): variant; override;
+    procedure ChangeParam(sender: TObject; pParamName, value : string); override;
+    constructor create(AOwner: TComponent); override;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+{ TDMFirebird }
+
+procedure TDMFirebird.ChangeParam(sender: TObject; pParamName, value: string);
+begin
+  inherited;
+  ExecProc('POW_CHANGEPARAM',[tform(sender).Name,pParamName, value]);
+end;
+
+function TDMFirebird.Connect(pUsuario, pPassword: string): string;
+begin
+  result := '';
+  try
+    with DB do
+    begin
+      LibraryName := fLibrary;
+      ConnectParams.UserName := pUsuario;
+      ConnectParams.Password := pPassword;
+      DBName := format('%s/%d:%S',[fhost, fport, fdbfile]);
+      connected := true;
+    end;
+  except
+    on e: exception do
+    begin
+      result := e.Message;
+    end;
+  end;
+end;
+
+function TDMFirebird.Connected: boolean;
+begin
+  result := DB.Connected;
+end;
+
+constructor TDMFirebird.create(aOwner: TComponent);
+begin
+  inherited;
+  LoadConfig;
+
+  //Create DB objects
+  DB := tpFibDatabase.Create(self);
+  TR := tpFibTransaction.Create(self);
+  TRU := tpFibTransaction.Create(self);
+
+  with DB do
+  Begin
+    DefaultTransaction := TR;
+    DefaultUpdateTransaction := TRU;
+  end;
+end;
+
+procedure TDMFirebird.DeclareAndSetVars(ds: TpFIBDataSet;
+  params: array of variant);
+begin
+  ds.SetParamValues(params);
+end;
+
+destructor TDMFirebird.Destroy;
+var i : integer;
+begin
+  if db.Connected then
+    db.Connected := false;
+  for i := 0 to DSCount - 1 do
+  with DSList[0] do
+  begin
+    if Active then
+      Close;
+    Free;
+  end;
+  db.Free;
+  inherited;
+end;
+
+
+
+function TDMFirebird.DSET(pSQL: string; pParams: array of variant;
+  pSource: tdatasource; pKeyFields: string; pReadonly: boolean): tdataset;
+var
+  ds : TpFIBDataSet;
+  t, tu : TpFIBTransaction;
+  tablelist, tablename : string;
+  vSQLParserSelect: ISQLParserSelect;
+begin
+  ds := TpFIBDataSet.Create(nil);
+  t := TpFIBTransaction.Create(nil);
+  tu := TpFIBTransaction.Create(nil);
+  t.DefaultDatabase := db;
+  tu.DefaultDatabase := db;
+
+  ds.Database := db;
+  ds.SQLs.SelectSQL.Text := pSQL;
+  ds.AutoCommit := true;
+
+  vSQLParserSelect := TGaSQLParserFactory.Select(pSQL);
+  tablelist := vSQLParserSelect.From;
+  tablename := uppercase(trim(token(tablelist,',')));
+
+  with ds.AutoUpdateOptions do
+  begin
+    UpdateTableName := tablename;
+    AutoParamsToFields := true;
+    AutoRewritesqls := true;
+    keyfields := pKeyfields;
+  end;
+  ds.DataSource := psource;
+
+  ds.Open;
+
+  if not pReadonly
+  then ds.GenerateSQLs
+  else ds.AllowedUpdateKinds := [];
+
+  SetLength(DSList,High(dslist) + 2);
+  DSList[High(DSList)] := ds;
+
+  result := ds;
+end;
+
+function TDMFirebird.DSET(pSQL : string; pParams : array of variant; pReadonly : boolean): tdataset;
+var
+  ds : TpFIBDataSet;
+  t, tu : TpFIBTransaction;
+  tablelist, tablename : string;
+  vSQLParserSelect: ISQLParserSelect;
+begin
+  ds := TpFIBDataSet.Create(nil);
+  t := TpFIBTransaction.Create(nil);
+  tu := TpFIBTransaction.Create(nil);
+  t.DefaultDatabase := db;
+  tu.DefaultDatabase := db;
+
+  ds.Database := db;
+  ds.SQLs.SelectSQL.Text := pSQL;
+  ds.AutoCommit := true;
+
+  vSQLParserSelect := TGaSQLParserFactory.Select(pSQL);
+  tablelist := vSQLParserSelect.From;
+  tablename := uppercase(trim(token(tablelist,',')));
+  ds.AutoUpdateOptions.UpdateTableName := tablename;
+  ds.Open;
+
+  if not pReadonly
+  then ds.GenerateSQLs
+  else ds.AllowedUpdateKinds := [];
+
+  SetLength(DSList,High(dslist) + 2);
+  DSList[High(DSList)] := ds;
+
+  result := ds;
+end;
+
+function TDMFirebird.ExecFunc(pFunctName: string;
+  pParamList: array of Variant): variant;
+var
+  sp : TpFIBStoredProc;
+  t : tpFibTransaction;
+begin
+  inherited;
+  sp := TpFIBStoredProc.Create(self);
+  t := tpFibTransaction.Create(self);
+  t.DefaultDatabase := db;
+  t.Active := true;
+  sp.Database := db;
+  sp.Transaction := t;
+  sp.Options := [qoStartTransaction,qoAutoCommit];
+  sp.StoredProcName := pFunctName;
+  sp.SetParamValues(pParamList);
+
+  sp.ExecProc;
+  result := sp.Fields[0].Value;
+  sp.Free;
+
+end;
+
+procedure TDMFirebird.ExecProc(pProcname: string; pParamList: array of Variant);
+var
+  sp : TpFIBStoredProc;
+  t : tpFibTransaction;
+begin
+  inherited;
+  sp := TpFIBStoredProc.Create(self);
+  t := tpFibTransaction.Create(self);
+  t.DefaultDatabase := db;
+  t.Active := true;
+  sp.Database := db;
+  sp.Transaction := t;
+  sp.Options := [qoStartTransaction,qoAutoCommit];
+  sp.StoredProcName := pProcName;
+  sp.SetParamValues(pParamList);
+
+  sp.ExecProc;
+  sp.Free;
+end;
+
+function TDMFirebird.ExecSQL(pSQL: string;pParamList: array of Variant): string;
+var
+  q : TpFIBQuery;
+  t : tpFibTransaction;
+begin
+  q := TpFIBQuery.Create(self);
+  t := tpFibTransaction.Create(self);
+  t.DefaultDatabase := db;
+  t.Active := true;
+  q.Database := db;
+  q.Transaction := t;
+  q.Options := [qoStartTransaction,qoAutoCommit];
+  q.SQL.Text := pSQL;
+  q.SetParamValues(pParamList);
+  q.ExecQuery;
+  q.Free;
+end;
+
+
+
+
+
+procedure TDMFirebird.loadConfig;
+begin
+  fdbman := 'FIREBIRD';
+  fVersion := '2.5';
+  fLoginPrompt := true;
+  fLoginAttempts := 3;
+  fAdminUser := true;
+  fDialect := 3;
+  fHost := 'LOCALHOST';
+  fPort := 3050;
+  fDBFile := 'E:\Proyectos\PowERP\V2\Bin\Data\data3.fdb';
+  fLibrary := 'fbclient.dll';
+end;
+
+function TDMFirebird.GetParam(sender: TObject; pParName: string): string;
+var
+  nm, par, val : string;
+begin
+  val := ExecFunc('POW_GETPARAM',[tform(sender).Name,pParName]);
+  Result := val;
+end;
+
+
+initialization
+  RegisterClass(TDMFirebird);
+finalization
+  UnRegisterClass(TDMFirebird);
+
+end.

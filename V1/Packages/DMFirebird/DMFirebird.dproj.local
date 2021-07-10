@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/10/24 00:39:43.000.138,=rtl.dcp</Transaction>
+    <Transaction>2018/10/24 00:40:04.000.366,D:\Documentos\Embarcadero\Studio\Projects\Package1.dproj=D:\Documentos\Embarcadero\Studio\Projects\DMFirebird.dproj</Transaction>
+    <Transaction>2018/10/24 00:41:05.000.523,D:\Documentos\Embarcadero\Studio\Projects\DMFirebird.dproj=E:\Proyectos\PowERP\Packages\DMFirebird\DMFirebird.dproj</Transaction>
+    <Transaction>2018/10/24 00:45:18.000.654,=E:\Proyectos\PowERP\Packages\DMFirebird\Unit1.pas</Transaction>
+    <Transaction>2018/10/24 00:46:07.000.564,E:\Proyectos\PowERP\Packages\DMFirebird\Unit1.dfm=E:\Proyectos\PowERP\Packages\DMFirebird\uDMFirebird.dfm</Transaction>
+    <Transaction>2018/10/24 00:46:07.000.564,E:\Proyectos\PowERP\Packages\DMFirebird\Unit1.pas=E:\Proyectos\PowERP\Packages\DMFirebird\uDMFirebird.pas</Transaction>
+    <Transaction>2018/10/24 00:46:54.000.250,=DMRootLib.dcp</Transaction>
+    <Transaction>2018/10/24 00:49:21.000.561,=vcl.dcp</Transaction>
+    <Transaction>2018/10/24 01:20:31.000.274,=xmlrtl.dcp</Transaction>
+    <Transaction>2018/10/24 22:18:28.000.967,=dbrtl.dcp</Transaction>
+    <Transaction>2018/10/24 22:18:28.000.977,=FIBPlus_XE7.dcp</Transaction>
+    <Transaction>2018/10/27 13:28:26.000.318,=E:\Proyectos\PowERP\Packages\DMFirebird\Unit1.pas</Transaction>
+    <Transaction>2018/10/27 13:28:37.000.499,E:\Proyectos\PowERP\Packages\DMFirebird\uDMFirebird.pas=</Transaction>
+    <Transaction>2018/10/27 13:28:45.000.244,E:\Proyectos\PowERP\Packages\DMFirebird\Unit1.pas=E:\Proyectos\PowERP\Packages\DMFirebird\uDMFirebird.pas</Transaction>
+  </Transactions>
+</BorlandProject>

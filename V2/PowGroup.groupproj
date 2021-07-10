@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{AD69D8E6-1180-4229-83A6-7A5DD78DB279}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PowERP.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Packages\DMRoot\DMRootLib.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Packages\DMFirebird\DMFirebird.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PowERP">
+        <MSBuild Projects="PowERP.dproj"/>
+    </Target>
+    <Target Name="PowERP:Clean">
+        <MSBuild Projects="PowERP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PowERP:Make">
+        <MSBuild Projects="PowERP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DMRootLib">
+        <MSBuild Projects="Source\Packages\DMRoot\DMRootLib.dproj"/>
+    </Target>
+    <Target Name="DMRootLib:Clean">
+        <MSBuild Projects="Source\Packages\DMRoot\DMRootLib.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DMRootLib:Make">
+        <MSBuild Projects="Source\Packages\DMRoot\DMRootLib.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DMFirebird">
+        <MSBuild Projects="Source\Packages\DMFirebird\DMFirebird.dproj"/>
+    </Target>
+    <Target Name="DMFirebird:Clean">
+        <MSBuild Projects="Source\Packages\DMFirebird\DMFirebird.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DMFirebird:Make">
+        <MSBuild Projects="Source\Packages\DMFirebird\DMFirebird.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PowERP;DMRootLib;DMFirebird"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PowERP:Clean;DMRootLib:Clean;DMFirebird:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PowERP:Make;DMRootLib:Make;DMFirebird:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

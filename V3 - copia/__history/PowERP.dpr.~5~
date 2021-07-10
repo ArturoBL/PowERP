@@ -1,0 +1,63 @@
+program PowERP;
+
+uses
+  Vcl.Forms,
+  vcl.Dialogs,
+  System.SysUtils, system.Classes,
+  uDMRoot,
+  Main in 'Source\Units\Main.pas' {frmMain},
+  Splash in 'Source\Units\Splash.pas' {frmSplash};
+
+{$R *.res}
+
+
+Procedure ShowSplash;
+begin
+  if AppHeader.SplashFile <> '' then
+  begin
+    //Show splash screen
+    frmSplash := TfrmSplash.Create(application,AppHeader.splashfile);
+    frmsplash.Show;
+    application.ProcessMessages;
+    sleep(1000);
+    frmsplash.Close;
+  end;
+end;
+
+Procedure LoadDMLib;
+var
+  DMFile : string;
+  PackageModule: HModule;
+  AClass: TPersistentClass;
+begin
+//  case AnsiIndexStr(AnsiString(initparams.DBMAN),
+//        [  'FIREBIRD'
+//          ,'ORACLE'
+//        ]) of
+//    0 : DMFile := 'DMFirebird.BPL';
+//    1 : DMFile := 'DMOracle.BPL';
+//  end;
+  DMFILE := extractfilepath(application.ExeName) + '\LIB\' + DMFILE;
+
+  DM := nil;
+
+  PackageModule := LoadPackage(DMFile);
+  if PackageModule <> 0 then
+  begin
+    AClass := GetClass('TDMData');
+    if AClass <> nil then
+      DM := TDMRoot(TComponentClass(AClass).Create(Application));
+  end;
+end;
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  AppHeader := LoadHeader;
+
+  ShowSplash;
+
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.

@@ -1,0 +1,32 @@
+program PowERP;
+
+uses
+  Vcl.Forms,
+  vcl.Dialogs,
+  vcl.Controls,
+  System.SysUtils,
+  system.Classes,
+  uDMRoot,
+  Main in 'Source\Units\Main.pas' {frmMain},
+  Splash in 'Source\Units\Splash.pas' {frmSplash},
+  Login in 'Source\Units\Login.pas' {FrmLogin};
+
+{$R *.res}
+
+
+
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  AppHeader := LoadHeader;
+  ShowSplash;
+  LoadDMLib;
+
+
+  if not Conectar then Exit;
+
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.

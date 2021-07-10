@@ -1,0 +1,26 @@
+PowERP
+
+Etapa 1 : generación de interfaz dinámica y acciones generales
+
+* Generaciòn de interfaz
+* NO sql desde proyecto principal
+* Generar árbol de barra principal desde dm
+* Construir barra desde árbol
+* Tipos de acciones:
+   - Reporte (con preacción y postacción).
+   - Stored Proc
+   - Script
+   - Abrir ventana dinámica
+   - Abrir ventana BPL
+   - Ejecutar procedimiento BPL
+* Grids desde cadena sql
+   
+
+Etapa 2 : generación de SQL desde editor visual
+
+* Diagrama ER visual e intuitivo.
+
+Etapa 3 : generación de BD desde wizard
+
+* Generar mediante modelo ER visual.
+* Generar mediante tablas.

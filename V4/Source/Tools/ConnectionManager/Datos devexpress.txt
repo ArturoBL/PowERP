@@ -1,0 +1,120 @@
+with vg.add(TcxEditorRow) as TcxEditorRow do
+  begin
+    Properties.caption := 'combo';
+    Properties.EditPropertiesClass := TcxComboboxProperties;
+    TcxComboBoxProperties(properties.EditProperties).Items.Add('uno');
+    TcxComboBoxProperties(properties.EditProperties).Items.Add('dos');
+	//properties.Value := 'dos';
+  end;
+  
+  
+    with vg.add(TcxEditorRow) as TcxEditorRow do
+  begin
+    Properties.caption := 'check';
+    Properties.EditPropertiesClass := TcxCheckboxProperties;
+    TcxCheckboxProperties(properties.EditProperties).ValueChecked := 'S' ;
+    TcxCheckboxProperties(properties.EditProperties).ValueUnchecked := 'N' ;
+    properties.Value := 'S';
+  end;
+  
+  
+  with vg.Rows[1] as TcxEditorRow do
+  begin
+    showmessage(properties.EditProperties.Owner.ClassName);
+    showmessage(string(properties.Value));
+    showmessage(inttostr(TcxComboboxProperties(properties.EditProperties).Items.IndexOf(properties.Value)));
+  end;
+  
+  
+  
+  //Cargar CSV
+  
+    dxMemData1.DelimiterChar:=',';
+    dxMemData1.LoadFromTextFile('data.csv');
+    dxMemData1.Active:=True;
+	
+	
+// crear fieldefs
+procedure CreateField(AMemData: TDataSet; AFieldName: string; AFieldType: TFieldType);
+
+begin
+
+ if (AMemData = nil) or (AFieldName = '') then
+
+   Exit;
+
+ with AMemData.FieldDefs.AddFieldDef do
+
+ begin
+
+   Name := AFieldName;
+
+   DataType := AFieldType;
+
+   CreateField(AMemData);
+
+ end;
+
+end;
+
+
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+begin
+
+  dxMemData1.FieldDefs
+
+
+
+ CreateField(dxMemData1, 'ID',ftInteger);
+
+ CreateField(dxMemData1, 'Name',ftString);
+
+ CreateField(dxMemData1, 'Data',ftString);
+
+ dxMemData1.Open;
+
+ dxMemData1.Insert;
+
+ dxMemData1.FieldByName('Data').AsString  := 'a';
+
+ dxMemData1.Post;
+
+end;	
+
+
+
+//Crear Fieldefs y columnas del grid
+
+procedure TForm1.Button1Click(Sender: TObject);
+
+  procedure CreateField(AMemData: TDataSet; AFieldName: string; AFieldType: TFieldType);
+  begin
+    if (AMemData = nil) or (AFieldName = '') then
+      Exit;
+
+    with AMemData.FieldDefs.AddFieldDef do
+    begin
+      Name := AFieldName;
+      DataType := AFieldType;
+      CreateField(AMemData);
+    end;
+  end;
+
+begin
+  CreateField(dxMemData1,'id_empleado',ftinteger);
+  CreateField(dxMemData1,'nombre',ftstring);
+
+    dxMemData1.DelimiterChar:=',';
+    dxMemData1.LoadFromTextFile('data.csv');
+    dxMemData1.Active:=True;
+
+
+  gtv.DataController.CreateAllItems(true);
+end;
+
+procedure TForm1.Button2Click(Sender: TObject);
+begin
+  showmessage(tdataset(dxmemdata1).FieldByName('nombre').AsString);
+end;

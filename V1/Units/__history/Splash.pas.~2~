@@ -1,0 +1,44 @@
+unit Splash;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, GR32_Image;
+
+type
+  TfrmSplash = class(TForm)
+    imgSplash: TImage32;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    constructor Create(pSplashFile : string); reintroduce; overload;
+  end;
+
+var
+  frmSplash: TfrmSplash;
+
+implementation
+
+{$R *.dfm}
+
+{ TfrmSplash }
+
+
+{ TfrmSplash }
+
+
+
+{ TfrmSplash }
+
+
+
+{ TfrmSplash }
+
+constructor TfrmSplash.Create(pSplashFile: string);
+begin
+  imgSplash.Bitmap.LoadFromFile(pSplashFile);
+end;
+
+end.

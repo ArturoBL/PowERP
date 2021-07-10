@@ -1,0 +1,84 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{774AB542-E21D-48AE-9D74-FAED77801D1A}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="PowERP.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Packages\uDMRoot\DMRoot.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Packages\uDMFirebird\DMFirebird.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Packages\uDMCSV\DMCSV.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Source\Tools\ConnectionManager\ConnectionManager.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="PowERP">
+        <MSBuild Projects="PowERP.dproj"/>
+    </Target>
+    <Target Name="PowERP:Clean">
+        <MSBuild Projects="PowERP.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PowERP:Make">
+        <MSBuild Projects="PowERP.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DMRoot">
+        <MSBuild Projects="Source\Packages\uDMRoot\DMRoot.dproj"/>
+    </Target>
+    <Target Name="DMRoot:Clean">
+        <MSBuild Projects="Source\Packages\uDMRoot\DMRoot.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DMRoot:Make">
+        <MSBuild Projects="Source\Packages\uDMRoot\DMRoot.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DMFirebird">
+        <MSBuild Projects="Source\Packages\uDMFirebird\DMFirebird.dproj"/>
+    </Target>
+    <Target Name="DMFirebird:Clean">
+        <MSBuild Projects="Source\Packages\uDMFirebird\DMFirebird.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DMFirebird:Make">
+        <MSBuild Projects="Source\Packages\uDMFirebird\DMFirebird.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DMCSV">
+        <MSBuild Projects="Source\Packages\uDMCSV\DMCSV.dproj"/>
+    </Target>
+    <Target Name="DMCSV:Clean">
+        <MSBuild Projects="Source\Packages\uDMCSV\DMCSV.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DMCSV:Make">
+        <MSBuild Projects="Source\Packages\uDMCSV\DMCSV.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ConnectionManager">
+        <MSBuild Projects="Source\Tools\ConnectionManager\ConnectionManager.dproj"/>
+    </Target>
+    <Target Name="ConnectionManager:Clean">
+        <MSBuild Projects="Source\Tools\ConnectionManager\ConnectionManager.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ConnectionManager:Make">
+        <MSBuild Projects="Source\Tools\ConnectionManager\ConnectionManager.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="PowERP;DMRoot;DMFirebird;DMCSV;ConnectionManager"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="PowERP:Clean;DMRoot:Clean;DMFirebird:Clean;DMCSV:Clean;ConnectionManager:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="PowERP:Make;DMRoot:Make;DMFirebird:Make;DMCSV:Make;ConnectionManager:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/11/05 22:41:48.000.799,D:\Documentos\Embarcadero\Studio\Projects\ProjectGroup1.groupproj=E:\Proyectos\PowERP\V3\PowGroup.groupproj</Transaction>
+  </Transactions>
+	<Default.Personality>
+		<Projects ActiveProject="E:\Proyectos\PowERP\V3\Source\Packages\uDMFirebird\DMFirebird.dproj"/>
+	</Default.Personality>
+</BorlandProject>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DBMANLIST>
+  <FIREBIRD libfile="DMFirebird.bpl">
+    <V2.5>
+	  <FBLIBRARY default="fbclient.dll"/>
+	  <FBFILE />
+	  <FBDIALECT default="1">
+	    <OPTION>1</OPTION>
+		<OPTION>2</OPTION>
+		<OPTION>3</OPTION>
+	  </FBDIALECT>
+	  <HOST default="localhost"/>
+	  <PORT default="3050" type="INT"/>
+	  <LOGINPROMPT default="S" readonly="S"/>	   
+	  <LOGINATTEMPTS default="3" TYPE="INT"/>
+	</V2.5>
+  </FIREBIRD>
+  <ORACLE libfile="DMOracle.bpl">
+  </ORACLE>
+  <CSV libfile="DMCSV.BPL">
+    <V1>
+	  <SEPARATOR default=",">
+	    <OPTION>,</OPTION>
+		<OPTION>;</OPTION>		
+	  </SEPARATOR>
+	  <FORMSFILE default="FORMS.CSV"/>
+	  <PARAMFILE default="PARAM.CSV"/>
+	  <TABSFILE default="TABS.CSV"/>
+	  <GROUPSFILE default="GROUPS.CSV"/>
+	  <BUTTONSFILE default="BUTTONS.CSV"/>	  
+	  <LOGINPROMPT default="N" readonly="S"/>	   
+	</V1>
+  </CSV>
+</DBMANLIST>

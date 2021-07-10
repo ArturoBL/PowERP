@@ -1,0 +1,53 @@
+program PowERP;
+
+uses
+  Vcl.Forms,
+  Main in 'Source\Units\Main.pas' {frmMain},
+  XMLDoc,
+  XMLIntf,
+  dialogs,
+  controls,
+  system.StrUtils,
+  system.Classes,
+  system.SysUtils,
+  uDMRoot,
+  Splash in 'Source\Units\Splash.pas' {frmSplash};
+
+{$R *.res}
+
+var
+  initParams : record
+    splashFile,
+    DBMAN:string;
+  end;
+
+Procedure LoadInitConfig;
+var
+  d : IXMLDocument;
+  e : IXMLNode;
+begin
+  D := LoadXMLDocument(extractfilepath(application.ExeName) + '\DATA\config.xml');
+  e := d.DocumentElement;
+  with initparams do
+  begin
+    if trim(e.ChildNodes['SPLASH'].Text) <> '' then
+    begin
+      splashFile :=extractfilepath(application.ExeName) + 'MEDIA\' + trim(e.ChildNodes['SPLASH'].Text);
+      if not fileexists(splashfile) then
+        splashfile := '';
+    end
+    else splashfile := '';
+    DBMAN := e.ChildNodes['DBManager'].ChildNodes['DBMNAME'].Text;
+  end;
+end;
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+
+  //Load Init parameters
+  LoadInitConfig;
+
+  Application.CreateForm(TfrmMain, frmMain);
+  Application.Run;
+end.

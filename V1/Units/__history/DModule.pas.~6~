@@ -1,0 +1,53 @@
+unit DModule;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, XMLIntf,XMLDoc, dialogs, forms;
+
+type
+  TDM = class(TDataModule)
+  private
+    { Private declarations }
+    FBversion : string;
+    FBlibrary : string;
+    FBFile : string;
+    FBDialeect : integer;
+    splashfile : string;
+  public
+    { Public declarations }
+    Procedure LoadConfig;
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TDM }
+
+procedure TDM.LoadConfig;
+var
+  d : IXMLDocument;
+  e : IXMLNode;
+begin
+  D := LoadXMLDocument(extractfilepath(application.ExeName) + 'config.xml');
+  e := d.DocumentElement;
+  splashfile := e.ChildNodes['SPLASH'].Text;
+  with e.ChildNodes['DBManager'] do
+  begin
+    FBversion := ChildNodes['DBMVERSION'].Text;
+    with ChildNodes['DBSETTINGS'] do
+    begin
+       FBlibrary := Attributes['LIBRARY'];
+       FBFile := Attributes['DBFILE'];
+       FBDialeect := Attributes['SQLDIALECT'];
+    end;
+  end;
+end;
+
+end.

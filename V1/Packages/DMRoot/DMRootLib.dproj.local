@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2018/10/24 00:04:20.000.024,=rtl.dcp</Transaction>
+    <Transaction>2018/10/24 00:05:39.000.678,D:\Documentos\Embarcadero\Studio\Projects\Package1.dproj=D:\Documentos\Embarcadero\Studio\Projects\DMRootLib.dproj</Transaction>
+    <Transaction>2018/10/24 00:06:07.000.580,D:\Documentos\Embarcadero\Studio\Projects\DMRootLib.dproj=E:\Proyectos\PowERP\Packages\DMRoot\DMRootLib.dproj</Transaction>
+    <Transaction>2018/10/24 00:26:35.000.590,=E:\Proyectos\PowERP\Packages\DMRoot\Unit1.pas</Transaction>
+    <Transaction>2018/10/24 00:28:49.000.859,E:\Proyectos\PowERP\Packages\DMRoot\Unit1.pas=E:\Proyectos\PowERP\Packages\DMRoot\uDMRoot.pas</Transaction>
+    <Transaction>2018/10/24 00:28:49.000.859,E:\Proyectos\PowERP\Packages\DMRoot\Unit1.dfm=E:\Proyectos\PowERP\Packages\DMRoot\uDMRoot.dfm</Transaction>
+    <Transaction>2018/10/24 22:42:38.000.445,=dbrtl.dcp</Transaction>
+    <Transaction>2018/10/24 22:42:38.000.447,=FIBPlus_XE7.dcp</Transaction>
+    <Transaction>2018/10/27 13:22:24.000.867,E:\Proyectos\PowERP\Packages\DMRoot\uDMRoot.pas=</Transaction>
+    <Transaction>2018/10/27 13:22:30.000.444,=E:\Proyectos\PowERP\Packages\DMRoot\Unit1.pas</Transaction>
+    <Transaction>2018/10/27 13:27:12.000.510,E:\Proyectos\PowERP\Packages\DMRoot\Unit1.pas=E:\Proyectos\PowERP\Packages\DMRoot\uDMRoot.pas</Transaction>
+  </Transactions>
+</BorlandProject>

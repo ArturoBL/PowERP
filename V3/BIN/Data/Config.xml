@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <SPLASH></SPLASH>
+  <DBManager>
+    <DBMNAME>FIREBIRD</DBMNAME>
+	<DBMVERSION>2.5</DBMVERSION>
+	<DBSETTINGS FBLIBRARY="fbclient.dll" FBFILE="E:\Proyectos\PowERP\V3\BIN\Data\DATA.FDB" FBDIALECT="3" HOST="LOCALHOST" PORT="3050" LOGINPROMPT="S" LOGINATTEMPTS="2"/>
+	<MAINPAR_TABLE>POW_MAINPAR</MAINPAR_TABLE>
+  </DBManager>
+</Configuration>  

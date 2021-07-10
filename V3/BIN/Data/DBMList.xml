@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DBMANLIST>
+  <FIREBIRD LIBFILE="DMFirebird.bpl">
+    <V2.5>
+	  <FBLIBRARY />
+	  <FBFILE />
+	  <FBDIALECT />
+	  <HOST />
+	  <PORT />
+	  <LOGINPROMPT />
+	  <LOGINATTEMPTS />
+	</V2.5>
+  </FIREBIRD>
+  <ORACLE>
+  </ORACLE>
+</DBMANLIST>

@@ -1,0 +1,65 @@
+unit DModule;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, XMLIntf,XMLDoc, dialogs, forms;
+
+type
+  TDM = class(TDataModule)
+  private
+    { Private declarations }
+    FBversion : string;
+    FBlibrary : string;
+    fSplashfile : string;
+    FLoginPrompt : boolean;
+    FBDialect : integer;
+    function GetSplashFile: string;
+  public     FBFile : string;
+    { Public declarations }
+    Procedure LoadConfig;
+    Property LoginPrompt : boolean read fLoginPrompt;
+    Property SplashFile : string read GetSplashFile;
+  end;
+
+var
+  DM: TDM;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+{ TDM }
+
+function TDM.GetSplashFile: string;
+begin
+  if fsplashfile <> ''
+  then result := extractfilepath(application.ExeName) + '\MEDIA\' + fSplashfile
+  else result := '';
+end;
+
+procedure TDM.LoadConfig;
+var
+  d : IXMLDocument;
+  e : IXMLNode;
+begin
+  //Load config file
+  D := LoadXMLDocument(extractfilepath(application.ExeName) + 'config.xml');
+  e := d.DocumentElement;
+  fsplashfile := e.ChildNodes['SPLASH'].Text;
+  with e.ChildNodes['DBManager'] do
+  begin
+    FBversion := ChildNodes['DBMVERSION'].Text;
+    with ChildNodes['DBSETTINGS'] do
+    begin
+       FBlibrary := Attributes['FBLIBRARY'];
+       FBFile := Attributes['FBFILE'];
+       FBDialect := strtoint(Attributes['FBDIALECT']);
+       FLoginPrompt := Attributes['LOGINPROMPT'] = 'S';
+    end;
+  end;
+end;
+
+end.
